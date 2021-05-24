@@ -23,7 +23,11 @@ def index(request):
             for entry in entry_list:
                 if search == entry.lower():
                     return redirect('titlepageview', title=entry)
-    
+
+            entry_list = list(filter(lambda x: search in x.lower(), entry_list))
+            if not entry_list:
+                return redirect(notFound)
+
 
     context = {"entries": util.list_entries()}
     return render(request, "encyclopedia/index.html", context)
@@ -39,6 +43,7 @@ def titlepage_view(request, title):
                 return render(request, "encyclopedia/titlepage.html", context)
 
 
+    
     context = {"title" : title}
     return render(request, "encyclopedia/entrynotfound.html", context)
 
