@@ -8,5 +8,8 @@
 
     <h1>{{ title }}</h1>
     {{ getentry }}
+    <br><br>
+    <button><a href="{% url 'addentry' %}">Edit page</a></button>
+    <button><a href="{% url 'index' %}">Return Home</a></button>
 
 {% endblock %}

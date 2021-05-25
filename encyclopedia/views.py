@@ -1,16 +1,9 @@
 from django.shortcuts import render, redirect
-from django import forms
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+import random
 
 from . import util
-
-#    search = forms.CharField(label="", 
-#        widget=forms.TextInput(attrs={'placeholder': 'Search Encyclopedia'}))
-
-#class AddPageForm(forms.Form):
-#    title = forms.CharField(label="Title : ", 
-#        widget=forms.TextInput(attrs={'placeholder': 'Enter Title of the page'}))
-#    newpage = forms.CharField(label="", 
-#        widget=forms.Textarea(attrs={'placeholder': 'Type article here.'}))
 
 
 def index(request):
@@ -60,6 +53,8 @@ def edit_entry(request, title):
     context = {"title": title , "content": content}
     return render(request, "encyclopedia/editentry.html", context)
 
-
-
-
+def random_entry(request):
+    entry_list=util.list_entries()
+    if entry_list:
+        title = random.choice(entry_list)
+        return HttpResponseRedirect(reverse("titlepageview", args=(title,)))
