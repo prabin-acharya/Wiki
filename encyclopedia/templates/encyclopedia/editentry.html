@@ -1,0 +1,15 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+	Edit {{ title }}
+{% endblock %}
+
+{% block body %}
+	<form name="editentry" id="edientry">
+		<label for="title">Edit Title : </label><br>
+		<input type="text" name="title" id="title" value="{{ title }}"><br>
+		<label for="content">Edit entry :</label><br>
+		<textarea style="height: auto"  name="content" id="content" rows="15"></textarea>
+	</form>
+
+{% endblock %}
