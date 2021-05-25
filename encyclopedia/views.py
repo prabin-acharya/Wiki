@@ -51,9 +51,15 @@ def notFound(request):
     return render(request, "encyclopedia/entrynotfound.html")
 
 
-def addpage_view(request):
-    context = {"searchform": SearchForm()}
-    return render(request, "encyclopedia/addpage.html", context)
+def addentry_view(request):
+    context = {}
+    return render(request, "encyclopedia/addentry.html", context)
+
+def edit_entry(request, title):
+    content = util.get_entry(title)
+    context = {"title": title , "content": content}
+    return render(request, "encyclopedia/editentry.html", context)
+
 
 
 
