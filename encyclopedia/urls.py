@@ -4,10 +4,10 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"), 
-    path("wiki/<str:title>/", views.titlepage_view, name="titlepageview"),
-    re_path(r"^wiki/(?P<title>).*[\s\w]*/$", views.titlepage_view, name="titlepageview"),
-    path("wiki/entrynotfound/", views.notFound, name='entrynotfound'),
-    path("addentry/", views.addentry_view, name='addentry'),
+    path("wiki/<str:title>/", views.wiki_entry, name="wikientry"),
+    #re_path(r"^wiki/(?P<title>).*[\s\w]*/$", views.wiki_entry, name="wikientry"),
+    path("wiki/entry-not-found/", views.notFound, name='entrynotfound'),
+    path("add-entry/", views.add_entry, name='add_entry'),
     path("random-entry/", views.random_entry, name='random_entry')
     ]
 
