@@ -9,7 +9,7 @@
     <h1>{{ title }}</h1>
     {{ getentry }}
     <br><br>
-    <button><a href="{% url 'add_entry' %}">Edit page</a></button>
+    <button><a href="{% url 'editentry' title=title %}">Edit page</a></button>
     <button><a href="{% url 'index' %}">Return Home</a></button>
 
 {% endblock %}

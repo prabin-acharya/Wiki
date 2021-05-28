@@ -6,13 +6,14 @@
 
 {% block body %}
 
-    <form action="" method="post" name="newentryform">
+    <form action="{% url 'addentry' %}" method='post' name='newentryform'>
     	{% csrf_token %}
         <label for="title">Title : </label><br>
     	<input type="text" id="title" name="title"><br>
-        <label for="newentry">Enter new entry in md : </label><br>
+        <label for="content">Enter content in md : </label><br>
         <textarea style="height: auto"  name="content" id="content" rows="15" cols="5"></textarea>
-
+        <br>
+        <input type="submit" value="Save Page"></a></submit>
     </form>
     
 

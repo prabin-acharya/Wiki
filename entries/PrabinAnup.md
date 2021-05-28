@@ -1,0 +1,1 @@
+Hello, adding a new page to my Wiki.

@@ -19,7 +19,6 @@ def index(request):
                     #Here,if "wikientry" it will redirect to url with name wikientry but
                     #here it redirects to view function wiki_entry.
 
-
             entry_list = list(filter(lambda x: search in x.lower(), entry_list))
             if not entry_list:
                 return redirect(notFound)
@@ -49,11 +48,29 @@ def notFound(request):
 
 #Add new entry to the encyclopedia. 
 def add_entry(request):
-    context = {}
-    return render(request, "encyclopedia/addentry.html", context)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        entry_list = util.list_entries()
+        for entry in entry_list:
+            if title.lower().strip() == entry.lower():
+                context = {"title": entry}
+                return render(request, "encyclopedia/entryalreadyexists.html", context)
+        if title is not None:
+            content = request.POST.get("content")
+            util.save_entry(title, content)
+            return HttpResponseRedirect(reverse(wiki_entry, args=(title,)))
+
+    return render(request, "encyclopedia/addentry.html")
+
 
 #Edit a particular entry.
 def edit_entry(request, title):
+    if request.method == "POST":
+        if title is not None:
+            content = request.POST.get("content")
+            util.save_entry(title, content)
+            return HttpResponseRedirect(reverse(wiki_entry, args=(title,)))
+
     content = util.get_entry(title)
     context = {"title": title , "content": content}
     return render(request, "encyclopedia/editentry.html", context)
@@ -65,11 +82,10 @@ def random_entry(request):
     if entry_list:
         title = random.choice(entry_list)
         return HttpResponseRedirect(reverse(wiki_entry, args=(title,)))
-
         #return HttpResponseRedirect(reverse("wiki_entry", args=(title,))) ,Here this
         #returns an URL while above one redirects to view function.
         #If you need to use something similar to the url template tag in your code, 
         #you can use reverse (). This function helps avoid having to hardcode a URL
-        # in the view function.Here, it returns url with name "wikientry".We can also 
+        # in the view function.Here, it returns url with name "wikientry".
         #And, HttpResponseRedirect redirects it to that url with title as argument.Here,
         #we pass argument as tuple.

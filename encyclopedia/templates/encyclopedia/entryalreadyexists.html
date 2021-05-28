@@ -1,0 +1,12 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+	{{ title }} : Entry Already exists.
+{% endblock %}
+
+{% block body %}
+	<h2>OOPS.., </h2>We already have a page with that exact name.
+	<br>
+	<button><a href="{% url 'editentry' title %}">Edit {{ title }}</a></button>
+	<button><a href="{% url 'index' %}">Return Home</a></button>
+{% endblock %}
